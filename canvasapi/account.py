@@ -685,7 +685,12 @@ class Account(CanvasObject):
         response = self._requester.request(
             'POST',
             'accounts/{}/external_tools'.format(self.id),
-            _kwargs=combine_kwargs(**kwargs)
+            _kwargs=combine_kwargs(
+                name=name, 
+                privacy_level=privacy_level, 
+                consumer_key=consumer_key, 
+                shared_secret=shared_secret, 
+                **kwargs)
         )
         response_json = response.json()
         response_json.update({'account_id': self.id})
